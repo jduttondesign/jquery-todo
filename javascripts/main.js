@@ -4,7 +4,7 @@
   let uid = "";
 
 function putTodoInDOM (){
-  FbAPI.getTodos(apiKeys).then(function(items){
+  FbAPI.getTodos(apiKeys, uid).then(function(items){
       console.log("items from FB", items);
       $('#completed-tasks').html("");
       $('#incomplete-tasks').html("");
@@ -117,7 +117,21 @@ $('#registerButton').on('click', function(){
   });
 });
 
+$('#loginButton').on("click", function(){
+  let email = $('#inputEmail').val();
+  let password = $('#inputPassword').val();
 
+  let user = {
+    "email": email,
+    "password": password
+  };
+  FbAPI.loginUser(user).then(function(loginResponse){
+    uid = loginResponse.uid;
+    putTodoInDOM();
+    $('#login-container').addClass("hide");
+    $('#todo-container').removeClass("hide");
+  })
+})
 
 
 

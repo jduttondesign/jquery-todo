@@ -69,8 +69,5 @@ oldFirebase.deleteTodo = function(apiKeys, itemId){
 
 
 
-
-
-
   return oldFirebase;
 })(FbAPI || {});

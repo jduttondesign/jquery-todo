@@ -4,7 +4,8 @@
     <head>
         <meta charset="utf-8">
         <title>Jquery Todo</title>
-        <link rel="stylesheet" type="text/css" href="/lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/lib/bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="styles/main.css">
     </head>
 
@@ -21,6 +22,7 @@
 
         <div class="col-xs-offset-2 col-xs-8 hide"  id="todo-container">
             <h1>Todo App</h1>
+            <div ="logout-container"></div>
             
             <h3>New Todo</h3>
             <div class="col-xs-12 new-text-container">
@@ -40,11 +42,14 @@
         </div>
 
         <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
-        <script src="/lib/bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- <script src="/lib/bower_components/jquery/dist/jquery.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <!-- <script type="text/javascript" src="/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="/javascripts/firebase.js"></script>
         <script src="/javascripts/firebaseMethods.js"></script>
         <script src="/javascripts/firebaseAuth.js"></script>
+        <script src="/javascripts/firebaseUser.js"></script>
         <script src="/javascripts/main.js"></script>
 
 

@@ -38,9 +38,19 @@ function putTodoInDOM (){
     });
 }
 
+function createLogoutButton(){//creates the logout button dynamically
+  FbAPI.getUser(apiKeys, uid).then(function(UserResponse){
+    console.log("userResponse",hello );
+    $('logout-container').html("");
+    let currentUsername = user.username;
+    let logoutButton = `<button class = "btn btn-danger id="logoutButton">LOGOUT ${curentUsername}</button>`
+    $('#logout-container').append(logoutButton);
+  })
+}
+
 $(document).ready(function(){
   FbAPI.firebaseCredentials().then(function(keys){
-    console.log("keys", keys);
+    //console.log("keys", keys);
     apiKeys = keys;
     firebase.initializeApp(apiKeys);
   });
@@ -49,13 +59,13 @@ $(document).ready(function(){
     console.log("clicked new todo button");
     let newItem = {
       "task": $('#add-todo-text').val(),
-      "isCompleted" : false
-    };
+      "isCompleted" : false,
+      "uid":uid
+    };//obj to call inside iffe 
     FbAPI.addTodo(apiKeys, newItem).then(function(){
       putTodoInDOM();
     });
   });
-
 
 $('ul').on("click", ".delete", function(){
   let itemId = $(this).data("fbid");
@@ -72,7 +82,8 @@ $('ul').on("click", ".edit", function(){
     let itemId = $(this).data("fbid");
     let editedItem = {
       "task": parent.find(".inputTask").val(),
-      "isCompleted": false
+      "isCompleted": false,
+      "uid":uid
     };
     FbAPI.editTodo(apiKeys, itemId, editedItem).then(function(){
       parent.removeClass("editMode");
@@ -93,9 +104,7 @@ $('ul').on("change", 'input[type="checkbox"]', function(){
   FbAPI.editTodo(apiKeys, itemId, editedItem).then(function(){
     putTodoInDOM();
   });
-
 });
-
 
 $('#registerButton').on('click', function(){
   let email = $('#inputEmail').val();
@@ -120,7 +129,7 @@ $('#registerButton').on('click', function(){
 $('#loginButton').on("click", function(){
   let email = $('#inputEmail').val();
   let password = $('#inputPassword').val();
-
+  let userName = $('#inputUsername').val()
   let user = {
     "email": email,
     "password": password
@@ -132,19 +141,16 @@ $('#loginButton').on("click", function(){
     $('#todo-container').removeClass("hide");
   })
 })
-
-
-
-
-
-
-
-
-
-
-
+FbAPI.registerUser(user).then(function(response){
+  console.log("register response", response);
+  return FbAPI.addUser(apiKeys, username)
+}).then(function(addUserResponse){
+})
 });
 
-
-
-
+$('logout-container').on("click", "#logoutButton", function(){//dynamically created logout btn 
+  FbAPI.logoutUser();
+  uid = "";
+  $('#login-container').removeClass("hide");
+  $("todo-container").addClass("hide");
+});
